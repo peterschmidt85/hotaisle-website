@@ -1,0 +1,179 @@
+@import "tailwindcss";
+/* @vscode/css-language-service-ignore */
+@plugin "@tailwindcss/typography";
+
+:root {
+	/* Arctic Light Theme */
+	--background: #ffffff;
+	--foreground: #0f172a;
+	/* Slate 900 */
+	--card: #f8fafc;
+	/* Slate 50 */
+	--card-foreground: #0f172a;
+	--primary: #0f172a;
+	--primary-foreground: #ffffff;
+	--secondary: #f1f5f9;
+	/* Slate 100 */
+	--secondary-foreground: #0f172a;
+	--muted: #f1f5f9;
+	--muted-foreground: #64748b;
+	/* Slate 500 */
+	--accent: #e0f2fe;
+	/* Sky 100 */
+	--accent-foreground: #0284c7;
+	/* Sky 600 */
+	--destructive: #ef4444;
+	--destructive-foreground: #ffffff;
+	--border: #e2e8f0;
+	/* Slate 200 */
+	--input: #e2e8f0;
+	--ring: #0f172a;
+	--radius: 0.5rem;
+
+	/* Hot Aisle Brand Color */
+	--hot-orange: #f97316;
+	/* Orange 500 */
+}
+
+.dark {
+	/* Arctic Dark Theme - True Black */
+	--background: #000000;
+	/* Pure Black */
+	--foreground: #fafafa;
+	/* Neutral 50 */
+	--card: #0a0a0a;
+	/* Neutral 950 */
+	--card-foreground: #fafafa;
+	--primary: #fafafa;
+	--primary-foreground: #171717;
+	/* Neutral 900 */
+	--secondary: #262626;
+	/* Neutral 800 */
+	--secondary-foreground: #fafafa;
+	--muted: #262626;
+	--muted-foreground: #a3a3a3;
+	/* Neutral 400 */
+	--accent: #0c4a6e;
+	/* Sky 900 */
+	--accent-foreground: #38bdf8;
+	/* Sky 400 */
+	--destructive: #7f1d1d;
+	--destructive-foreground: #fafafa;
+	--border: #262626;
+	--input: #262626;
+	--ring: #d4d4d4;
+}
+
+/* @vscode/css-language-service-ignore */
+@theme inline {
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-destructive: var(--destructive);
+	--color-destructive-foreground: var(--destructive-foreground);
+	--color-border: var(--border);
+	--color-input: var(--input);
+	--color-ring: var(--ring);
+	--radius-sm: calc(var(--radius) - 2px);
+	--radius-md: calc(var(--radius));
+	--radius-lg: calc(var(--radius) + 2px);
+
+	--color-hot-orange: var(--hot-orange);
+	--color-arctic-blue: var(--hot-orange); /* Backward compatibility alias */
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	color: var(--foreground);
+	background-color: var(--background);
+}
+
+/* Global Prose Enhancements */
+.prose img {
+	width: 100%;
+	max-width: 100%;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	border-radius: 0.75rem;
+	/* rounded-xl */
+	box-shadow:
+		0 4px 6px -1px rgb(0 0 0 / 0.1),
+		0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.prose h1,
+.prose h2,
+.prose h3 {
+	letter-spacing: -0.025em;
+	/* tracking-tight */
+}
+
+.prose a {
+	font-weight: 500;
+	color: var(--arctic-blue);
+	text-decoration: none;
+	border-bottom: 1px solid transparent;
+	transition: all 0.2s ease;
+}
+
+.prose a:hover {
+	border-bottom-color: var(--arctic-blue);
+}
+
+.prose strong {
+	font-weight: 700;
+	color: var(--foreground);
+}
+
+.prose code {
+	padding: 0.2rem 0.4rem;
+	font-size: 0.875em;
+	font-weight: 600;
+	color: var(--arctic-blue);
+	background-color: var(--secondary);
+	border-radius: 0.25rem;
+}
+
+.prose pre {
+	padding: 1rem;
+	overflow-x: auto;
+	background-color: var(--card);
+	border: 1px solid var(--border);
+	border-radius: 0.5rem;
+}
+
+.prose blockquote {
+	padding-left: 1.5rem;
+	font-style: italic;
+	color: var(--muted-foreground);
+	border-left-color: var(--arctic-blue);
+}
+
+.prose ul > li::marker {
+	color: var(--arctic-blue);
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.animation-fade-in {
+	animation: fadeIn 0.8s ease-out forwards;
+}

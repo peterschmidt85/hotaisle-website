@@ -1,0 +1,44 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+
+# dependencies
+.jj/*
+/node_modules
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+.open-next/*
+
+# misc
+
+# os specific
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# logs
+logs
+*.log
+
+# editor
+.vscode
+.idea
+*.swp
+*.swo
+
+# env files (can opt-in for committing if needed)
+.env*
+
+# cf
+.wrangler/*
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
