@@ -240,14 +240,14 @@ export function Sidebar() {
 						>
 							<Search size={20} />
 						</button>
-						<a
+						<Link
 							className="rounded-md p-2 text-muted-foreground transition-colors hover:bg-hot-orange/10 hover:text-hot-orange"
-							href="mailto:hello@hotaisle.ai"
+							href="/contact"
 							onMouseEnter={(e) => handleMouseEnter(e, 'Contact Us')}
 							onMouseLeave={handleMouseLeave}
 						>
 							<Mail size={20} />
-						</a>
+						</Link>
 						<ThemeToggle />
 					</>
 				) : (
@@ -264,16 +264,16 @@ export function Sidebar() {
 							</button>
 						</div>
 						<div className="flex flex-col items-end">
-							<a
+							<Link
 								className="group/link mb-1 flex items-center gap-1 font-medium text-sm transition-colors hover:text-hot-orange"
-								href="mailto:hello@hotaisle.ai"
+								href="/contact"
 							>
 								Say hello
 								<ChevronRight
 									className="-ml-2 text-hot-orange opacity-0 transition-all duration-300 group-hover/link:ml-0 group-hover/link:opacity-100"
 									size={12}
 								/>
-							</a>
+							</Link>
 							<span className="text-[10px] text-muted-foreground opacity-50">
 								© {new Date().getFullYear()} Hot Aisle
 							</span>
