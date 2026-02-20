@@ -16,7 +16,7 @@ export default function MI300XPage() {
 			<div className="animate-pulse bg-linear-to-r from-emerald-900 to-green-800 px-4 py-3 text-center font-bold text-sm text-white md:text-base">
 				🔥 We are now accepting MI355x reservations!{' '}
 				<Link className="ml-2 underline hover:text-white/90" href="/mi355x">
-					Contact us to reserve
+					Reserve now
 				</Link>
 			</div>
 

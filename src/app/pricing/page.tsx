@@ -19,11 +19,8 @@ export default function PricingPage() {
 			{/* MI355x Announcement Banner */}
 			<div className="animate-pulse bg-linear-to-r from-orange-500 to-red-600 px-4 py-3 text-center font-bold text-sm text-white md:text-base">
 				🔥 We are now accepting MI355x reservations!{' '}
-				<Link
-					className="ml-2 underline hover:text-white/90"
-					href="mailto:hello@hotaisle.ai"
-				>
-					Contact us to reserve
+				<Link className="ml-2 underline hover:text-white/90" href="/mi355x">
+					Reserve now
 				</Link>
 			</div>
 
