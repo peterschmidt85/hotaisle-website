@@ -1,13 +1,5 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import matter from 'gray-matter';
-import { remark } from 'remark';
-import remarkGfm from 'remark-gfm';
-import html from 'remark-html';
 import { BLOG_POSTS } from '@/generated/blog-data';
-
-const CONTENT_DIR = path.join(process.cwd(), 'content');
-const MD_EXTENSION_REGEX = /\.md$/i;
+import { POLICIES } from '@/generated/static-content-data';
 
 export interface PageData {
 	author?: string;
@@ -29,54 +21,26 @@ export type BlogPost = PageData & {
 	coverImage?: string;
 };
 
-async function renderMarkdown(markdown: string): Promise<string> {
-	const processedContent = await remark().use(remarkGfm).use(html).process(markdown);
-	return processedContent.toString();
-}
-
 const BLOG_POSTS_BY_SLUG = new Map(BLOG_POSTS.map((post) => [post.slug, post]));
+const POLICIES_BY_SLUG = new Map(POLICIES.map((policy) => [policy.slug, policy]));
 
-export async function getPageContent(
-	category: 'pages' | 'policies' | 'blog',
+export function getPageContent(
+	category: 'policies' | 'blog',
 	slug: string
 ): Promise<PageData | null> {
 	if (category === 'blog') {
-		return BLOG_POSTS_BY_SLUG.get(slug) ?? null;
+		return Promise.resolve(BLOG_POSTS_BY_SLUG.get(slug) ?? null);
 	}
 
-	const fullPath = path.join(CONTENT_DIR, category, `${slug}.md`);
-	if (!fs.existsSync(fullPath)) {
-		return null;
-	}
-
-	const fileContents = fs.readFileSync(fullPath, 'utf8');
-	const { data, content } = matter(fileContents);
-	const contentHtml = await renderMarkdown(content);
-	const title = String(data.title ?? slug);
-	const description = data.description ? String(data.description) : undefined;
-	const hasDistinctDescription =
-		description && description.trim().toLowerCase() !== title.trim().toLowerCase();
-
-	return {
-		slug,
-		title,
-		description: hasDistinctDescription ? description : undefined,
-		contentHtml,
-	};
+	return Promise.resolve(POLICIES_BY_SLUG.get(slug) ?? null);
 }
 
-export function getAllSlugs(category: 'pages' | 'policies' | 'blog'): string[] {
+export function getAllSlugs(category: 'policies' | 'blog'): string[] {
 	if (category === 'blog') {
 		return BLOG_POSTS.map((post) => post.slug);
 	}
 
-	const dir = path.join(CONTENT_DIR, category);
-	if (!fs.existsSync(dir)) {
-		return [];
-	}
-
-	const files = fs.readdirSync(dir);
-	return files.map((fileName) => fileName.replace(MD_EXTENSION_REGEX, ''));
+	return POLICIES.map((policy) => policy.slug);
 }
 
 export function getAllBlogPosts(): Promise<BlogPost[]> {
