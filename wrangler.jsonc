@@ -8,5 +8,11 @@
 		"directory": ".open-next/assets",
 		"binding": "ASSETS"
 	},
-	"send_metrics": false
+	"send_metrics": false,
+	"routes": [
+		{
+			"pattern": "hotaisle.xyz",
+			"custom_domain": true
+		}
+	]
 }
