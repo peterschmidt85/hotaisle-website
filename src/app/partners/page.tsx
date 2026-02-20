@@ -30,7 +30,11 @@ const partners = [
 		category: 'Orchestration',
 		icon: Database,
 		list: [
-			{ name: 'dstack', url: 'https://dstack.ai', desc: 'Premier AI Orchestration Platform' },
+			{
+				name: 'dstack',
+				url: 'https://dstack.ai',
+				desc: 'Open-source GPU-native orchestration',
+			},
 		],
 	},
 	{
