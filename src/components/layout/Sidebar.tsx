@@ -203,7 +203,7 @@ export function Sidebar() {
 					return (
 						<Link
 							className={cn(
-								'group relative flex items-center rounded-md px-3 py-2 font-medium text-sm transition-colors hover:bg-hot-orange/10 hover:text-hot-orange',
+								'group relative flex items-center rounded-md px-3 py-2 font-medium text-base transition-colors hover:bg-hot-orange/10 hover:text-hot-orange',
 								isActive
 									? 'bg-hot-orange/10 font-bold text-hot-orange'
 									: 'text-muted-foreground',
