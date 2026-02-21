@@ -22,7 +22,7 @@ const partners = [
 			{ name: 'Dell Technologies', url: 'https://dell.com', desc: 'Global Hardware Partner' },
 			{ name: 'AMD', url: 'https://www.amd.com', desc: 'Together We Advance' },
 			{ name: 'Broadcom', url: 'https://broadcom.com/', desc: 'Networking & Connectivity' },
-			{ name: 'Advizex', url: 'https://advizex.com', desc: 'Fulcrum IT Partners' },
+			{ name: 'Advizex', url: 'https://advizex.com', desc: 'Customers for Life.' },
 			{ name: 'Switch', url: 'https://switch.com', desc: 'World-Class Data Centers' },
 		],
 	},
