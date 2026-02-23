@@ -1,11 +1,11 @@
 ---
 title: Maintenance Policy
 description: Procedures for scheduled and emergency maintenance.
-date: '2026-02-05'
+date: '2026-02-22'
 ---
 * * *
 
-Last modified: **May 25th, 2024**
+Last modified: **February 22, 2026**
 
 _**Hot Aisle Maintenance and Notification Policy**_
 
@@ -15,7 +15,7 @@ To be clear, Hot Aisle may perform unplanned maintenance or service to the Hot A
 
 ### Notifications
 
-Hot Aisle will take reasonable efforts to make planned maintenance events known via its [https://status.hotaisle.app](https://status.hotaisle.app) (to be setup) dashboard. It is a user's responsibility to ensure they are subscribed to the status notifications relevant to their Hot Aisle deployments.
+Hot Aisle will take reasonable efforts to make planned maintenance events known via email and/or Slack notifications to our customers.
 
 ### Critical Infrastructure Maintenance
 
