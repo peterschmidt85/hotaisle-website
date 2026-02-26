@@ -4,6 +4,7 @@ import { ArrowLeft, Calendar } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { getPageContent, type PageData } from '@/lib/content';
+import './syntax-highlighting.css';
 
 const PUBLISH_DATE_FORMATTER = new Intl.DateTimeFormat('en-US', {
 	year: 'numeric',

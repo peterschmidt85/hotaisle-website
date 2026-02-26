@@ -144,11 +144,21 @@ body {
 }
 
 .prose pre {
-	padding: 1rem;
+	padding: 1.5rem;
 	overflow-x: auto;
-	background-color: var(--card);
+	background-color: var(--muted);
 	border: 1px solid var(--border);
 	border-radius: 0.5rem;
+	line-height: 1.6;
+}
+
+.prose pre code {
+	padding: 0;
+	font-size: 0.875rem;
+	font-weight: 400;
+	color: var(--foreground);
+	background-color: transparent;
+	border-radius: 0;
 }
 
 .prose blockquote {

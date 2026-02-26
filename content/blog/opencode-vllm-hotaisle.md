@@ -65,38 +65,35 @@ You can find my fork of the cloud-init templates here: https://github.com/vmiss3
 
 The cloud-init file I used is as follows:
 
-  - ```
-    #cloud-config
-    #Get Qwen3 Coder Next running.
-    
-    | runcmd: |
-    | ------- |
-    
-        echo "Starting vLLM Docker container..."
-        docker rm -f vllm || true
-        docker run -d \
-          --name vllm \
-          --network=host \
-          --group-add=video \
-          --ipc=host \
-          --cap-add=SYS_PTRACE \
-          --security-opt seccomp=unconfined \
-          --privileged \
-          --device /dev/kfd \
-          --device /dev/dri \
-          --restart=always \
-          rocm/vllm:latest \
-          vllm serve Qwen/Qwen3-Coder-30B-A3B-Instruct \
-            --max-model-len 131272 \
-            --block-size 256 \
-            --enable-auto-tool-choice \
-            --tool-call-parser qwen3_xml
-    
-      - |
-        echo "vLLM container started. Check status with: docker logs -f vllm"
-        echo "API should be available on port 8000 (host networking)."
-     
-    ```
+```yaml
+#cloud-config
+#Get Qwen3 Coder Next running.
+
+runcmd:
+  - |
+    echo "Starting vLLM Docker container..."
+    docker rm -f vllm || true
+    docker run -d \
+      --name vllm \
+      --network=host \
+      --group-add=video \
+      --ipc=host \
+      --cap-add=SYS_PTRACE \
+      --security-opt seccomp=unconfined \
+      --privileged \
+      --device /dev/kfd \
+      --device /dev/dri \
+      --restart=always \
+      rocm/vllm:latest \
+      vllm serve Qwen/Qwen3-Coder-30B-A3B-Instruct \
+        --max-model-len 131272 \
+        --block-size 256 \
+        --enable-auto-tool-choice \
+        --tool-call-parser qwen3_xml
+  - |
+    echo "vLLM container started. Check status with: docker logs -f vllm"
+    echo "API should be available on port 8000 (host networking)."
+```
 
 If you are new to vLLM, here are some details on how it is configured for this example:
 
@@ -169,25 +166,27 @@ After issuing the command to build the VM, you will see the following returned i
 
 You can call your cloud-init script as follows, illustrated in the Hot Aisle cloud-init repo.  I've put the file I used in my fork in this example.
 
-`export API_TOKEN="your-api-token-here"`
-`export API_BASE="https://admin.hotaisle.app/api"`
-`export TEAM_SLUG="your-team"`
+```bash
+export API_TOKEN="your-api-token-here"
+export API_BASE="https://admin.hotaisle.app/api"
+export TEAM_SLUG="your-team"
 
-`c`url -X 'POST' \`
-  `"${API_BASE}/teams/${TEAM_SLUG}/virtual_machines/" \`
-  `-H 'accept: application/json' \`
-  `-H "Authorization: Token ${API_TOKEN}" \`
-  `-H 'Content-Type: application/json' \`
-  `-d '{`
-    `"gpus": [`
-      `{`
-        `"count": 1,`
-        `"manufacturer": "AMD",`
-        `"model": "MI300X"`
-      `}`
-    `],`
-    `"user_data_url": "https://raw.githubusercontent.com/vmiss33/cloud-init-templates/master/vllm-docker-qwen3-coder.yaml"`
-  }'`
+curl -X 'POST' \
+  "${API_BASE}/teams/${TEAM_SLUG}/virtual_machines/" \
+  -H 'accept: application/json' \
+  -H "Authorization: Token ${API_TOKEN}" \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "gpus": [
+      {
+        "count": 1,
+        "manufacturer": "AMD",
+        "model": "MI300X"
+      }
+    ],
+    "user_data_url": "https://raw.githubusercontent.com/vmiss33/cloud-init-templates/master/vllm-docker-qwen3-coder.yaml"
+  }'
+```
 
 ![](./opencode-vllm-hotaisle/cloud-init results.png)
 
@@ -195,13 +194,17 @@ You can call your cloud-init script as follows, illustrated in the Hot Aisle clo
 
 Between deploying the VM and starting vLLM, it will take about five minutes.  Most of this time is model download and GPU initialization.  You can check the status of cloud init with the command:
 
-`cloud-init status`
+```bash
+cloud-init status
+```
 
 ![](./opencode-vllm-hotaisle/cloud-init-status.png)
 
 you can check the status of vLLM using the following command
 
-`docker logs -f vllm`
+```bash
+docker logs -f vllm
+```
 
 ![](./opencode-vllm-hotaisle/02-model-loaded.png)
 
@@ -209,16 +212,18 @@ The Application startup complete line indicates the model has completed loading.
 
 You can test your with the following code:
 
-`curl http://localhost:8000/v1/completions \`
-  `-H "Content-Type: application/json" \`
-  `-d '{`
-    `"model": "Qwen/Qwen3-Coder-30B-A3B-Instruct",`
-    `"prompt": "Write a haiku about artificial intelligence",`
-    `"max_tokens": 128,`
-    `"top_p": 0.95,`
-    `"top_k": 20,`
-    `"temperature": 0.8`
-  }'`
+```bash
+curl http://localhost:8000/v1/completions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "Qwen/Qwen3-Coder-30B-A3B-Instruct",
+    "prompt": "Write a haiku about artificial intelligence",
+    "max_tokens": 128,
+    "top_p": 0.95,
+    "top_k": 20,
+    "temperature": 0.8
+  }'
+```
 
 Here's the type of output you are looking for, an entertaining haiku:
 
@@ -232,33 +237,35 @@ Create a JSON file to serve as the OpenCode configuration file
 
 Here is what mine looks like:
 
-`{`
-  `"$schema": "https://opencode.ai/config.json",`
-  `"provider": {`
-    `"vllm-hotaisle": {`
-      `"npm": "@ai-sdk/openai-compatible",`
-      `"name": "Hot Aisle vLLM (Qwen3 Coder)",`
-      `"options": {`
-        `"baseURL": "http://localhost:8000/v1",`
-        `"apiKey": "sk-no-key-required"`
-      `},`
-      `"models": {`
-        `"Qwen/Qwen3-Coder-30B-A3B-Instruct": {`
-          `"name": "Qwen3-Coder 30B A3B Instruct (Primary)",`
-          `"limit": {`
-            `"context": 131072,  // Start at 128K; test up to 262144 if stable on your hardware`
-            `"output": 8192`
-          `}`
-        `}`
-      `}`
-    `}`
-  `},`
-  `"model": "vllm-hotaisle/Qwen/Qwen3-Coder-30B-A3B-Instruct",`
-  `"permission": {`
-    `"edit": "allow",`
-    `"bash": "allow"`
-  `}`
-`}`
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "vllm-hotaisle": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Hot Aisle vLLM (Qwen3 Coder)",
+      "options": {
+        "baseURL": "http://localhost:8000/v1",
+        "apiKey": "sk-no-key-required"
+      },
+      "models": {
+        "Qwen/Qwen3-Coder-30B-A3B-Instruct": {
+          "name": "Qwen3-Coder 30B A3B Instruct (Primary)",
+          "limit": {
+            "context": 131072,
+            "output": 8192
+          }
+        }
+      }
+    }
+  },
+  "model": "vllm-hotaisle/Qwen/Qwen3-Coder-30B-A3B-Instruct",
+  "permission": {
+    "edit": "allow",
+    "bash": "allow"
+  }
+}
+```
 
 Note: You can only have one model at a time in the file, so if you need to switch modes, don't forget to update the model line of this file.
 
@@ -266,7 +273,9 @@ Note: You can only have one model at a time in the file, so if you need to switc
 
 Create a ssh tunnel to the HotAisle VM:
 
-`ssh -N -L 8000:localhost:8000 hotaisle@x.x.x.x` 
+```bash
+ssh -N -L 8000:localhost:8000 hotaisle@x.x.x.x
+``` 
 
 where x.x.x.x is the IP of your HotAisle VM.
 
@@ -302,7 +311,9 @@ Hot Aisle is powered by AMD GPUs and the VM I deployed has 1 x MI300X.  This GPU
 
 The most useful command to know out of the gate if you are going to experiment with different models is:
 
-`rocm-smi`
+```bash
+rocm-smi
+```
 
 ![](./opencode-vllm-hotaisle/rocm-smi.png)
 

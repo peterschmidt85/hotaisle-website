@@ -1,0 +1,46 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { exec } from 'node:child_process';
+import { promisify } from 'node:util';
+
+const execAsync = promisify(exec);
+
+const CONTENT_DIR = path.join(process.cwd(), 'content');
+const BLOG_DIR = path.join(CONTENT_DIR, 'blog');
+const POLICIES_DIR = path.join(CONTENT_DIR, 'policies');
+
+let isGenerating = false;
+
+async function regenerateContent() {
+	if (isGenerating) {
+		return;
+	}
+
+	isGenerating = true;
+	console.log('Content changed, regenerating...');
+
+	try {
+		await execAsync('bun run generate:content');
+		console.log('Content regenerated successfully');
+	} catch (error) {
+		console.error('Failed to regenerate content:', error);
+	} finally {
+		isGenerating = false;
+	}
+}
+
+function watchDirectory(dir: string) {
+	if (!fs.existsSync(dir)) {
+		return;
+	}
+
+	fs.watch(dir, { recursive: true }, (eventType, filename) => {
+		if (filename?.endsWith('.md')) {
+			regenerateContent();
+		}
+	});
+}
+
+console.log('Watching content directories for changes...');
+watchDirectory(BLOG_DIR);
+watchDirectory(POLICIES_DIR);

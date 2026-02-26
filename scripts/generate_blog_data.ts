@@ -3,7 +3,9 @@ import path from 'node:path';
 import matter from 'gray-matter';
 import { remark } from 'remark';
 import remarkGfm from 'remark-gfm';
-import html from 'remark-html';
+import remarkRehype from 'remark-rehype';
+import rehypeHighlight from 'rehype-highlight';
+import rehypeStringify from 'rehype-stringify';
 
 const CONTENT_DIR = path.join(process.cwd(), 'content');
 const BLOG_DIR = path.join(CONTENT_DIR, 'blog');
@@ -480,7 +482,12 @@ function rewriteMarkdownLinks(markdown: string, fileStemToSlug: Map<string, stri
 }
 
 async function renderMarkdown(markdown: string): Promise<string> {
-	const processedContent = await remark().use(remarkGfm).use(html).process(markdown);
+	const processedContent = await remark()
+		.use(remarkGfm)
+		.use(remarkRehype)
+		.use(rehypeHighlight)
+		.use(rehypeStringify)
+		.process(markdown);
 	return processedContent.toString();
 }
 
