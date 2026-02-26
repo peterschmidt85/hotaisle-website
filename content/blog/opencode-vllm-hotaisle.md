@@ -101,15 +101,13 @@ If you are new to vLLM, here are some details on how it is configured for this e
 
 If you are new to vLLM, or have not played with it that much, here are a few things that we need to consider:
 
-`vllm serve Qwen/Qwen3-Coder-30B-A3B-Instruct \`
-
-​        `--max-model-len 131272 \`
-
-​        `--block-size 256 \`
-
-​        `--enable-auto-tool-choice \`
-
-​        `--tool-call-parser qwen3_xml`
+```bash
+vllm serve Qwen/Qwen3-Coder-30B-A3B-Instruct \
+  --max-model-len 131272 \
+  --block-size 256 \
+  --enable-auto-tool-choice \
+  --tool-call-parser qwen3_xml
+```
 
 `Max-model-len` is the maximum context window that the model is to support.  Each model will specify what it's maximum context length is, and you may tweak this value according to your needs.  vLLM allocates KV cache based on the context length, and it is important to remember that the KV cache lives in GPU memory.  Remember, within our GPUs we need to consider the weight of the model as well as the KV cache size.
 
