@@ -1,25 +1,27 @@
+import { Suspense, lazy } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import About from '@/app/about/page';
-import Benchmarks from '@/app/benchmarks-and-analysis/page';
-import BlogPost from '@/app/blog/[slug]/page';
-import Blog from '@/app/blog/page';
-import Cluster from '@/app/cluster/page';
-import Compute from '@/app/compute/page';
-import Contact from '@/app/contact/page';
-import Datacenter from '@/app/datacenter/page';
-import MI300X from '@/app/mi300x/page';
-import MI355X from '@/app/mi355x/page';
-import Networking from '@/app/networking/page';
-import NotFound from '@/app/not-found';
 import Home from '@/app/page';
-import Partners from '@/app/partners/page';
-import PolicyDetail from '@/app/policies/[slug]/page';
-import Policies from '@/app/policies/page';
-import Pricing from '@/app/pricing/page';
-import QuickStart from '@/app/quick-start/page';
 import { Sidebar } from '@/components/layout/Sidebar';
 import JsonLd from '@/components/seo/JsonLd';
 import { ThemeProvider } from '@/components/theme-provider';
+
+const About = lazy(() => import('@/app/about/page'));
+const Benchmarks = lazy(() => import('@/app/benchmarks-and-analysis/page'));
+const BlogPost = lazy(() => import('@/app/blog/[slug]/page'));
+const Blog = lazy(() => import('@/app/blog/page'));
+const Cluster = lazy(() => import('@/app/cluster/page'));
+const Compute = lazy(() => import('@/app/compute/page'));
+const Contact = lazy(() => import('@/app/contact/page'));
+const Datacenter = lazy(() => import('@/app/datacenter/page'));
+const MI300X = lazy(() => import('@/app/mi300x/page'));
+const MI355X = lazy(() => import('@/app/mi355x/page'));
+const Networking = lazy(() => import('@/app/networking/page'));
+const NotFound = lazy(() => import('@/app/not-found'));
+const Partners = lazy(() => import('@/app/partners/page'));
+const PolicyDetail = lazy(() => import('@/app/policies/[slug]/page'));
+const Policies = lazy(() => import('@/app/policies/page'));
+const Pricing = lazy(() => import('@/app/pricing/page'));
+const QuickStart = lazy(() => import('@/app/quick-start/page'));
 
 export function Router() {
 	return (
@@ -34,26 +36,28 @@ export function Router() {
 					<Sidebar />
 					<main className="relative w-full flex-1 overflow-y-auto pl-16 md:pl-0">
 						<JsonLd />
-						<Routes>
-							<Route element={<Home />} path="/" />
-							<Route element={<About />} path="/about" />
-							<Route element={<Benchmarks />} path="/benchmarks-and-analysis" />
-							<Route element={<Blog />} path="/blog" />
-							<Route element={<BlogPost />} path="/blog/:slug" />
-							<Route element={<Cluster />} path="/cluster" />
-							<Route element={<Compute />} path="/compute" />
-							<Route element={<Contact />} path="/contact" />
-							<Route element={<Datacenter />} path="/datacenter" />
-							<Route element={<MI300X />} path="/mi300x" />
-							<Route element={<MI355X />} path="/mi355x" />
-							<Route element={<Networking />} path="/networking" />
-							<Route element={<Partners />} path="/partners" />
-							<Route element={<Policies />} path="/policies" />
-							<Route element={<PolicyDetail />} path="/policies/:slug" />
-							<Route element={<Pricing />} path="/pricing" />
-							<Route element={<QuickStart />} path="/quick-start" />
-							<Route element={<NotFound />} path="*" />
-						</Routes>
+						<Suspense fallback={<div />}>
+							<Routes>
+								<Route element={<Home />} path="/" />
+								<Route element={<About />} path="/about" />
+								<Route element={<Benchmarks />} path="/benchmarks-and-analysis" />
+								<Route element={<Blog />} path="/blog" />
+								<Route element={<BlogPost />} path="/blog/:slug" />
+								<Route element={<Cluster />} path="/cluster" />
+								<Route element={<Compute />} path="/compute" />
+								<Route element={<Contact />} path="/contact" />
+								<Route element={<Datacenter />} path="/datacenter" />
+								<Route element={<MI300X />} path="/mi300x" />
+								<Route element={<MI355X />} path="/mi355x" />
+								<Route element={<Networking />} path="/networking" />
+								<Route element={<Partners />} path="/partners" />
+								<Route element={<Policies />} path="/policies" />
+								<Route element={<PolicyDetail />} path="/policies/:slug" />
+								<Route element={<Pricing />} path="/pricing" />
+								<Route element={<QuickStart />} path="/quick-start" />
+								<Route element={<NotFound />} path="*" />
+							</Routes>
+						</Suspense>
 					</main>
 				</div>
 			</ThemeProvider>
