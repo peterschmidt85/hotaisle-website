@@ -11,6 +11,7 @@
 		"dev": "vite",
 		"build": "vite build",
 		"preview": "vite preview",
+		"deploy": "vinext deploy",
 		"check": "bun ./node_modules/ultracite/dist/index.js check",
 		"fix": "bun ./node_modules/ultracite/dist/index.js fix"
 	},
