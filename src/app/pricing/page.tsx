@@ -165,8 +165,10 @@ export default function PricingPage() {
 
 			{/* Features List */}
 			<div className="container mx-auto mt-24 px-6">
-				<h2 className="mb-12 text-center font-bold text-4xl">Plans Include</h2>
-				<div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+				<h2 className="mb-16 text-center font-black text-4xl tracking-tight md:text-5xl">
+					All Plans <span className="text-arctic-blue">Include</span>
+				</h2>
+				<div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
 					{[
 						{
 							icon: Server,
@@ -191,7 +193,7 @@ export default function PricingPage() {
 						{
 							icon: Shield,
 							title: 'Private Isolated Networking',
-							desc: 'Secure multi-node environments.',
+							desc: 'Secure multi-node environments with public IP and firewall control.',
 						},
 						{
 							icon: Zap,
