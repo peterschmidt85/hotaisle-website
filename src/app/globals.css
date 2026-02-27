@@ -130,6 +130,14 @@ body {
 	text-decoration-thickness: 2px;
 }
 
+.prose .heading-link {
+	text-decoration: none;
+}
+
+.prose .heading-link:hover {
+	text-decoration: none;
+}
+
 .prose strong {
 	font-weight: 700;
 	color: var(--foreground);
