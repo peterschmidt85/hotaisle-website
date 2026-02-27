@@ -13,7 +13,9 @@ Tags: GPU, vLLM, OpenCode, ROCm, Agents
 
 # Connecting OpenCode to vLLM on Hot Aisle
 
-If you're looking for effectively unlimited tokens with a predictable hourly cost, connecting OpenCode to a self-hosted vLLM instance on Hot Aisle is a great way to get out of token jail.
+*This guide was written by a real human, not AI.*
+
+If you're looking for an "all you can eat" token plan with predictable hourly costs, connecting OpenCode to a self-hosted vLLM instance on Hot Aisle is a great way to get out of token jail.
 
 Instead of paying per request, you run your own model on dedicated GPUs and let OpenCode interact with it over an API endpoint just like a hosted provider.  The difference is that you control the hardware, the cost model, and the data.
 
@@ -95,11 +97,9 @@ runcmd:
     echo "API should be available on port 8000 (host networking)."
 ```
 
-If you are new to vLLM, here are some details on how it is configured for this example:
-
 ## vLLM Configuration Explained
 
-If you are new to vLLM, or have not played with it that much, here are a few things that we need to consider:
+If you are new to vLLM, here are the key configuration parameters to understand:
 
 ```bash
 vllm serve Qwen/Qwen3-Coder-30B-A3B-Instruct \
@@ -198,7 +198,7 @@ cloud-init status
 
 ![](./opencode-vllm-hotaisle/cloud-init-status.png)
 
-you can check the status of vLLM using the following command
+Check the status of vLLM with the following command:
 
 ```bash
 docker logs -f vllm
@@ -208,7 +208,7 @@ docker logs -f vllm
 
 The Application startup complete line indicates the model has completed loading.
 
-You can test your with the following code:
+Test the model with the following code:
 
 ```bash
 curl http://localhost:8000/v1/completions \
@@ -293,13 +293,13 @@ You do not need an API key, so if you are prompted for one just enter some text,
 
 ![](./opencode-vllm-hotaisle/open-code-api-connect.png)
 
-Next, you can select the model you wish to use.
+Select the model you wish to use.
 
 ![](./opencode-vllm-hotaisle/opencode-model-connect.png)
 
 The text **Hot Aisle vLLM (Qwen 3 Coder)** is the name I gave this provider in the configuration file, and **Qwen3-Coder 30B A3B Instruct** is the model we are using, which was also specified in the configuration file.  You may see different values here based on your setup.
 
-Going forward, OpenCode will remember your selection.  You can now see that OpenCode is connected to the model, and you can issue a prompt to get coding.
+Going forward, OpenCode will remember your selection. OpenCode is now connected to the model and ready to receive prompts.
 
 ![](./opencode-vllm-hotaisle/opencode-connected.png)
 
@@ -319,7 +319,7 @@ ROCm System Management Interface allows you to monitor your GPU.  ROCm or Radeon
 
 ## Why This Setup Is Powerful
 
-Running OpenCode against a self-hosted vLLM instance changes the development experience significantly.  Instead of worrying about token costs or API limits, you can iterate freely, experiment with different prompts, and run complex agent workflows without friction.  This makes remote GPU infrastructure especially valuable for development, research, and prototyping scenarios where experimentation speed matters more than per-request efficiency.
+Running OpenCode against a self-hosted vLLM instance changes the development experience significantly. Instead of worrying about token costs or API limits, developers can iterate freely, experiment with different prompts, and run complex agent workflows without friction. This makes remote GPU infrastructure especially valuable for development, research, and prototyping scenarios where experimentation speed matters more than per-request efficiency.
 
 While self-hosting introduces additional infrastructure considerations such as GPU memory sizing and concurrency management, tools like vLLM make it much more accessible than traditional inference stacks.  Once configured, the workflow feels very similar to using a hosted provider, but with full control over hardware, data, and configuration.
 
@@ -336,7 +336,23 @@ My Fork of Hot Aisle's cloud-init-templates:
 
 - https://github.com/vmiss33/cloud-init-templates
 
-*Melissa Palmer is an infrastructure architect exploring the messy intersection of GPUs, software, and real-world workloads.*
-LinkedIn: https://www.linkedin.com/in/vmiss
-X (Twitter): https://x.com/vmiss33
-GitHub: https://github.com/vmiss33
+---
+
+## About the Author
+
+*This is a guest post from a friend of Hot Aisle. This content is not sponsored or paid.*
+
+**Melissa Palmer** is an infrastructure architect exploring the messy intersection of GPUs, software, and real-world workloads.
+
+Connect with Melissa:
+- **LinkedIn:** [linkedin.com/in/vmiss](https://www.linkedin.com/in/vmiss)
+- **X (Twitter):** [@vmiss33](https://x.com/vmiss33)
+- **GitHub:** [github.com/vmiss33](https://github.com/vmiss33)
+
+---
+
+## Contribute to Hot Aisle
+
+The Hot Aisle website is open source under the MIT License and welcomes contributions from the community. Whether you want to fix a typo, improve documentation, or share your own technical content, we'd love to have your input.
+
+**Visit our GitHub repository:** [github.com/hotaisle/hotaisle-website](https://github.com/hotaisle/hotaisle-website)
