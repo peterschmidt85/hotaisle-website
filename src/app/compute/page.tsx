@@ -258,16 +258,6 @@ export default function ComputePage() {
 									width={1000}
 								/>
 							</div>
-							{/* Decorative GPU image overlay */}
-							<div className="absolute -bottom-12 -left-12 z-20 hidden h-48 w-48 overflow-hidden rounded-2xl border-4 border-background shadow-2xl md:block">
-								<img
-									alt="AMD MI300X Detail"
-									className="h-full w-full object-cover"
-									height={200}
-									src="/assets/compute/gpu.png"
-									width={200}
-								/>
-							</div>
 						</div>
 					</div>
 				</div>
