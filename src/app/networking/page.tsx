@@ -69,7 +69,7 @@ export default function NetworkingPage() {
 					</div>
 
 					<h1 className="mb-8 font-black text-5xl text-foreground tracking-tighter md:text-7xl">
-						Custom <span className="text-arctic-blue">Hardware Fabric</span>
+						Custom <span className="text-arctic-blue">Networking Fabric</span>
 					</h1>
 
 					<p className="mb-6 max-w-4xl font-light text-muted-foreground text-xl leading-relaxed md:text-2xl">
