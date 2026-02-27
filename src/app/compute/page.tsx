@@ -92,6 +92,16 @@ export default function ComputePage() {
 								width={800}
 							/>
 						</div>
+						{/* GPU Detail - Bottom Left */}
+						<div className="absolute -bottom-8 -left-8 z-20 h-32 w-32 overflow-hidden rounded-xl border border-border bg-background shadow-2xl md:h-40 md:w-40">
+							<img
+								alt="AMD MI300X Detail"
+								className="h-full w-full object-cover"
+								height={200}
+								src="/assets/compute/gpu.png"
+								width={200}
+							/>
+						</div>
 						<div className="absolute -right-6 -bottom-6 flex animate-bounce-slow items-center gap-3 rounded-xl border border-border bg-background p-4 shadow-xl">
 							<div className="rounded-lg bg-orange-100 p-2 text-orange-600">
 								<Server size={24} />
