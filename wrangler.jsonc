@@ -31,5 +31,6 @@
 			"pattern": "mta-sts.hotaisle.xyz",
 			"custom_domain": true
 		}
-	]
+	],
+	"images": { "binding": "IMAGES" }
 }
