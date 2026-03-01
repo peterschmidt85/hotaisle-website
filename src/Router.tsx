@@ -1,7 +1,8 @@
-import { Suspense, lazy } from 'react';
+import { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from '@/app/page';
 import { Sidebar } from '@/components/layout/Sidebar';
+import { HeadMetadata } from '@/components/seo/HeadMetadata';
 import JsonLd from '@/components/seo/JsonLd';
 import { ThemeProvider } from '@/components/theme-provider';
 
@@ -35,6 +36,7 @@ export function Router() {
 				<div className="flex h-screen overflow-hidden bg-background text-foreground antialiased">
 					<Sidebar />
 					<main className="relative w-full flex-1 overflow-y-auto pl-16 md:pl-0">
+						<HeadMetadata />
 						<JsonLd />
 						<Suspense fallback={<div />}>
 							<Routes>
